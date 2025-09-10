@@ -33,7 +33,7 @@ echo -e ""
 echo -e "      Esse script irá fazer a instalação do"
 echo -e "     slowdns para tunelamento de DNS com SSH."
 echo -e ""
-echo -e "         \033[1;37mInstalador feito por edição️ \033[1;37m"
+echo -e "         \033[1;37mInstaller made by edition️ \033[1;37m"
 echo -e ""
 echo -e "\033[1;31m════════════════════════════════════════════════════\033[0m"
 echo ""
@@ -65,7 +65,7 @@ systemctl start rc-local
 fun_bar 'ipt_set'
 clear
 echo ""
-echo -e "\033[1;31m ATENÇÃO NESSA ETAPA! \033[1;37m"
+echo -e "\033[1;31m ATTENTION AT THIS STAGE! \033[1;37m"
 echo ""
 echo -ne "\033[1;32m INFORME SEU NS (NAMESERVER)\033[1;37m: "; read nameserver
 cd /etc/slowdns
@@ -87,7 +87,7 @@ echo ""
 echo "Verificando existência de key"
 sleep 2
 echo ""
-echo "      Por favor aguarde...   "
+echo "      Please wait...   "
 sleep 2
 cd
 key1="/root/server.key"

@@ -18,7 +18,7 @@ fun_menu() {
         env_msg="=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
         env_msg+="<b>🤖 SEJA  BEM VINDO(a) AO BOT SSH 🤖</b>\n"
         env_msg+="=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
-        env_msg+="⚠️ <i>SELECIONE UMA OPCAO ABAIXO !</i>\n\n"
+        env_msg+="⚠️ <i>SELECT AN OPTION BELOW !</i>\n\n"
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text "$env_msg" \
             --reply_markup "$keyboard1" \
             --parse_mode html
@@ -111,15 +111,15 @@ fun_ajuda() {
         env_msg+="[<b>02</b>] /info = Exibe informacoes\n"
         env_msg+="[<b>03</b>] /ajuda = Informacoes sobre opcoes\n\n"
         env_msg+="⚠️ <i>Opções Disponiveis</i>\n\n"
-        env_msg+="• <u>CRIAR USUARIO</u> = Cria usuario ssh\n\n"
-        env_msg+="• <u>CRIAR TESTE</u> = Cria teste ssh\n\n"
-        env_msg+="• <u>REMOVER</u> = Remove usuario ssh\n\n"
-        env_msg+="• <u>SUSPENDER</u> = Suspender usuario ssh\n\n"
-        env_msg+="• <u>INFO USUARIOS</u> = Informacoes do usuario\n\n"
-        env_msg+="• <u>USUARIOS ONLINE</u> = Exibe Usuários onlines\n\n"
-        env_msg+="• <u>ALTERAR SENHA</u> = Altera senha ssh\n\n"
-        env_msg+="• <u>ALTERAR LIMITE</u> = Altera limite ssh\n\n"
-        env_msg+="• <u>ALTERAR DATA</u> = Altera data ssh\n\n"
+        env_msg+="• <u>CREATE USER</u> = Creates ssh user\n\n"
+        env_msg+="• <u>CREATE TEST</u> = Creates ssh test\n\n"
+        env_msg+="• <u>REMOVE</u> = Removes ssh user\n\n"
+        env_msg+="• <u>SUSPEND</u> = Suspend ssh user\n\n"
+        env_msg+="• <u>USER INFO</u> = User information\n\n"
+        env_msg+="• <u>ONLINE USERS</u> = Shows online users\n\n"
+        env_msg+="• <u>CHANGE PASSWORD</u> = Changes ssh password\n\n"
+        env_msg+="• <u>CHANGE LIMIT</u> = Changes ssh limit\n\n"
+        env_msg+="• <u>CHANGE DATE</u> = Changes ssh date\n\n"
         env_msg+="• <u>EXPIRADOS</u> = Remove ssh expirados\n\n"
         env_msg+="• <u>REVENDAS</u> = Gerenciar Revendas\n\n"
         env_msg+="• <u>RELATORIO</u> = Informacoes sobre revendas\n\n"
@@ -177,7 +177,7 @@ fun_adduser() {
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "👤 CRIAR USUARIO 👤\n\nNome do usuario:" \
+            --text "👤 CREATE USER 👤\n\nUsername:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
@@ -186,7 +186,7 @@ fun_adduser() {
     }
 }
 
-criar_user() {
+create_user() {
     IP=$(cat /etc/IP)
     newclient() {
         cp /etc/openvpn/client-common.txt ~/$1.ovpn

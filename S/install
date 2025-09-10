@@ -28,13 +28,13 @@ tput cnorm
 }
 clear
 echo -e "\033[1;31m════════════════════════════════════════════════════\033[0m"
-tput setaf 7 ; tput setab 4 ; tput bold ; printf '%40s%s%-12s\n' "INSTALADOR SLOWDNS MANAGER" ; tput sgr0
+tput setaf 7 ; tput setab 4 ; tput bold ; printf '%40s%s%-12s\n' "SLOWDNS MANAGER INSTALLER" ; tput sgr0
 echo -e "\033[1;31m════════════════════════════════════════════════════\033[0m"
 echo -e ""
 echo -e "      Esse script irá fazer a instalação do"
 echo -e "   gerenciador para o modo de conexão SlowDNS."
 echo -e ""
-echo -e "         \033[1;37mInstalador feito por edição \033[1;37m"
+echo -e "         \033[1;37mInstaller made by edition \033[1;37m"
 echo -e "\033[1;31m════════════════════════════════════════════════════\033[0m"
 echo ""
 echo -e "BAIXANDO DEPENDENCIAS..."
@@ -73,7 +73,7 @@ echo -e "\033[1;31m════════════════════�
 tput setaf 7 ; tput setab 4 ; tput bold ; printf '%40s%s%-12s\n' "INSTALADOR SLOWDNS MANAGER" ; tput sgr0
 echo -e "\033[1;31m════════════════════════════════════════════════════\033[0m"
 echo ""
-echo -e "          \033[1;37mINSTALAÇÃO CONCLUIDA!\033[0m          "
+echo -e "          \033[1;37mINSTALLATION COMPLETED!\033[0m          "
 echo ""
 echo -e "Para abrir o menu, use o comando: \033[1;37mslowdns\033[0m"
 cd

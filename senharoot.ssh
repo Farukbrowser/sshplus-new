@@ -33,7 +33,7 @@ iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
 iptables -A INPUT -p tcp --dport 1194 -j ACCEPT
 echo -e "\033[1;31mAttention!!\033[0m"
 echo ""
-echo -e "\033[1;37mThis password will be used to access your server
+echo -e "\033[1;37mThis password will be used to access your server"
 echo ""
 echo -ne "\033[1;32mSet root password\033[1;37m: "; read senha
 [[ -z "$senha" ]] && {

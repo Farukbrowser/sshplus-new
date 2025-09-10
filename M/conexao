@@ -115,7 +115,7 @@ SCOLOR='\033[0m'
 			echo -ne "\033[1;32mINFORME AS PORTAS\033[1;37m: "
 			read portass
 			[[ -z "$portass" ]] && {
-				echo -e "\n\033[1;31mPorta invalida!"
+				echo -e "\n\033[1;31mInvalid port!"
 				sleep 3
 				fun_conexao
 			}
@@ -129,13 +129,13 @@ SCOLOR='\033[0m'
 				echo -e "\n\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mSQUID VERSAO 3.3.X\n\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mSQUID VERSAO 3.5.X\033[0m\n"
 				read -p "$(echo -e "\033[1;32mINFORME UMA OPÇÃO \033[1;37m: ")" -e -i 1 opc
 				[[ -z "$opc" ]] && {
-					echo -e "\n\033[1;31mOpcao invalida!"
+					echo -e "\n\033[1;31mInvalid option!"
 					sleep 2
 					fun_conexao
 				}
 				[[ "$opc" != '1' ]] && {
 					[[ "$opc" != '2' ]] && {
-						echo -e "\n\033[1;31mOpcao invalida !"
+						echo -e "\n\033[1;31mInvalid option !"
 						sleep 2
 						fun_conexao
 					}
@@ -319,7 +319,7 @@ fun_squid
 			fun_conexao
 			;;
 		*)
-			echo -e "\033[1;31mOpcao Invalida...\033[0m"
+			echo -e "\033[1;31mInvalid Option...\033[0m"
 			sleep 2
 			fun_conexao
 			;;
@@ -405,7 +405,7 @@ fun_squid
 				clear
 				fun_conexao
 			else
-				echo -e "\n\033[1;31mOpcao invalida...\033[0m"
+				echo -e "\n\033[1;31mInvalid option...\033[0m"
 				sleep 2
 				fun_conexao
 			fi
@@ -565,7 +565,7 @@ fun_squid
 				read porta
 				[[ -z "$porta" ]] && {
 					echo ""
-					echo -e "\033[1;31mPorta invalida!"
+					echo -e "\033[1;31mInvalid port!"
 					sleep 3
 				fun_chisel
 				}
@@ -598,7 +598,7 @@ fun_squid
 				echo -ne "\033[1;32mSenha:\033[1;37m "
 				read password
 				[[ -z $password ]] && {
-					echo -e "\n${cor1}Senha vazia ou invalida!${scor}\n"
+					echo -e "\n${cor1}Empty or invalid password!${scor}\n"
 					fun_chisel
 				}
 				sizepass=$(echo ${#password})
@@ -636,7 +636,7 @@ echo -e "\n\033[1;32mCHISEL REINICIANDO COM SUCESSO !\033[1;33m"
 			fun_conexao
 		else
 			echo ""
-			echo -e "\033[1;31mOpcao invalida !\033[0m"
+			echo -e "\033[1;31mInvalid option !\033[0m"
 			sleep 1
 			fun_socks
 		fi
@@ -1157,7 +1157,7 @@ echo "Execulte como root"
 						read option
 						if [[ -z $option ]]; then
 							echo ""
-							echo -e "\E[41;1;37m          Opcao invalida  !        \E[0m"
+							echo -e "\E[41;1;37m          Invalid option  !        \E[0m"
 							sleep 2
 							fun_openvpn
 						fi
@@ -2054,7 +2054,7 @@ elif [[ "$resposta" = '4' ]]; then
 				elif [[ "$sts_cor" = "10" ]]; then
 					cor_sts='null'
 				else
-					echo -e "\n\033[1;33mOPCAO INVALIDA !"
+					echo -e "\n\033[1;33mINVALID OPTION !"
 					cor_sts='null'
 				fi
 				fun_msgsocks() {

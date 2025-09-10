@@ -411,7 +411,7 @@ case "$x" in
    clear
    ;;
    *)
-   echo -e "\n\033[1;31mOpcao invalida !\033[0m"
+   echo -e "\n\033[1;31mInvalid option !\033[0m"
    sleep 2
 esac
 done
@@ -507,7 +507,7 @@ case "$x" in
    2 | 02)
    clear
    criarteste
-   echo -ne "\n\033[1;31mENTER \033[1;37mpara retornar ao \033[1;32mMENU!\033[0m"; read
+   echo -ne "\n\033[1;31mPRESS ENTER \033[1;37mto return to \033[1;32mMENU!\033[0m"; read
    ;;
    3 | 03)
    clear
@@ -517,7 +517,7 @@ case "$x" in
    4 | 04)
    clear
    sshmonitor
-   echo -ne "\n\033[1;31mENTER \033[1;37mpara retornar ao \033[1;32mMENU!\033[0m"; read
+   echo -ne "\n\033[1;31mPRESS ENTER \033[1;37mto return to \033[1;32mMENU!\033[0m"; read
    ;;      
    5 | 05)
    clear
@@ -543,7 +543,7 @@ case "$x" in
    9 | 09)
    clear
    infousers
-   echo -ne "\n\033[1;31mENTER \033[1;37mpara retornar ao \033[1;32mMENU!\033[0m"; read
+   echo -ne "\n\033[1;31mPRESS ENTER \033[1;37mto return to \033[1;32mMENU!\033[0m"; read
    ;;
    10)
    clear
@@ -556,12 +556,12 @@ case "$x" in
    12)
    clear
    otimizar
-   echo -ne "\n\033[1;31mENTER \033[1;37mpara retornar ao \033[1;32mMENU!\033[0m"; read
+   echo -ne "\n\033[1;31mPRESS ENTER \033[1;37mto return to \033[1;32mMENU!\033[0m"; read
    ;;
    13)
    clear
    userbackup
-   echo -ne "\n\033[1;31mENTER \033[1;37mpara retornar ao \033[1;32mMENU!\033[0m"; read
+   echo -ne "\n\033[1;31mPRESS ENTER \033[1;37mto return to \033[1;32mMENU!\033[0m"; read
    ;;
    14)
    clear
@@ -575,7 +575,7 @@ case "$x" in
    16)
    clear
    detalhes
-   echo -ne "\n\033[1;31mENTER \033[1;37mpara retornar ao \033[1;32mMENU!\033[0m"; read
+   echo -ne "\n\033[1;31mPRESS ENTER \033[1;37mto return to \033[1;32mMENU!\033[0m"; read
    ;;
    17)
    clear
@@ -592,7 +592,7 @@ case "$x" in
    20)
    clear
    velocity
-   echo -ne "\n\033[1;31mENTER \033[1;37mpara retornar ao \033[1;32mMENU!\033[0m"; read
+   echo -ne "\n\033[1;31mPRESS ENTER \033[1;37mto return to \033[1;32mMENU!\033[0m"; read
    ;;
    21)
    clear
@@ -611,7 +611,7 @@ case "$x" in
    exit;
    ;;
    *)
-   echo -e "\n\033[1;31mOpcao invalida !\033[0m"
+   echo -e "\n\033[1;31mInvalid option !\033[0m"
    sleep 0.5
    menu
 esac

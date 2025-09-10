@@ -262,7 +262,7 @@ fun_edithost() {
         sleep 2
     else
         echo ""
-        echo -e "\033[1;31mOpcao invalida !\033[0m"
+        echo -e "\033[1;31mInvalid option !\033[0m"
         sleep 2
         fun_edithost
     fi
@@ -364,7 +364,7 @@ fun_usertoken() {
         printf '%30s%s%-15s\n' "SENHA NÃO ENCONTRADA"
         tput sgr0
         echo ""
-        echo -ne "\033[1;32mUMA SENHA AINDA NÃO FOI CADASTRADA, APERTE ENTER PARA CADASTRAR: \033[1;37m "
+        echo -ne "\033[1;32mA PASSWORD HAS NOT BEEN REGISTERED YET, PRESS ENTER TO REGISTER: \033[1;37m "
         read i
         clear
         tput setaf 7
@@ -427,7 +427,7 @@ else
     echo -ne "\033[1;32mPASSWORD:\033[1;37m "
     read password
     [[ -z $password ]] && {
-        echo -e "\n${cor1}SENHA VAZIA OU INVALIDA!${scor}\n"
+        echo -e "\n${cor1}EMPTY OR INVALID PASSWORD!${scor}\n"
         exit 1
     }
     sizepass=$(echo ${#password})

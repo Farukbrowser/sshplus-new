@@ -66,7 +66,7 @@ passwd -l $lock
 echo -e "\033[1;34m\033[1;37m\033[1;34m\033[1;37m \033[1;37mUSUÁRIO BLOQUEADO COM SUCESSO \033[0;32m"
 echo -e ""
 echo -e ""
-echo -ne "\n\033[1;37mENTER \033[1;37mPARA VOLTAR AO \033[1;37mMENU!\033[0m"; read
+echo -ne "\n\033[1;37mPRESS ENTER \033[1;37mTO RETURN TO \033[1;37mMENU!\033[0m"; read
 clear
 ;;
 2)clear
@@ -78,7 +78,7 @@ passwd -u  $unlock
 echo -e "\033[1;34m\033[1;37m\033[1;34m\033[1;37m \033[1;37mUSUÁRIO DESBLOQUEADO COM SUCESSO \033[0;32m"
 echo -e ""
 echo -e ""
-echo -ne "\n\033[1;37mENTER \033[1;37mPARA VOLTAR AO \033[1;37mMENU!\033[0m"; read
+echo -ne "\n\033[1;37mPRESS ENTER \033[1;37mTO RETURN TO \033[1;37mMENU!\033[0m"; read
 clear
 ;;
 0)clear
@@ -86,7 +86,7 @@ echo "RETORNANDO...."
 menu
 ;;
 *)clear
-echo "Opcao Invalida ..."
+echo "Invalid Option ..."
 sleep 1s
 clear
 ;;

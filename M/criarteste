@@ -31,7 +31,7 @@ echo -ne "\033[1;32mSenha\033[1;37m: "; read pass
 if [[ -z $pass ]]
 then
 echo ""
-tput setaf 7 ; tput setab 1 ; tput bold ; echo "" ; echo "Senha vazia ou invalida." ; echo "" ; tput sgr0
+tput setaf 7 ; tput setab 1 ; tput bold ; echo "" ; echo "Empty or invalid password." ; echo "" ; tput sgr0
 	exit 1
 fi
 echo -ne "\033[1;32mLimite\033[1;37m: "; read limit
