@@ -1553,8 +1553,39 @@ echo -e "\033[0;34m┗━━━━━━━━━━━━━━━━━━━�
 					p=$(echo $p | xargs) # trim whitespace
 					verif_ptrs $p
 				done
+				# Open firewall for each port in multiport configuration
+				for p in "${PORTS[@]}"; do
+					p=$(echo $p | xargs) # trim whitespace
+					if pgrep firewalld > /dev/null; then
+						firewall-cmd --zone=public --add-port=$p/tcp
+						firewall-cmd --permanent --zone=public --add-port=$p/tcp
+					fi
+					if iptables -L -n | grep -qE 'REJECT|DROP'; then
+						iptables -I INPUT -p tcp --dport $p -j ACCEPT
+					fi
+					# Add UFW rule if UFW is active
+					if [[ -f "/usr/sbin/ufw" ]] && ufw status | grep -q "Status: active"; then
+						ufw allow $p/tcp
+					fi
+				done
+				if pgrep firewalld > /dev/null; then
+					firewall-cmd --reload
+				fi
 			else
 				verif_ptrs $porta
+				# Open firewall for single port
+				if pgrep firewalld > /dev/null; then
+					firewall-cmd --zone=public --add-port=$porta/tcp
+					firewall-cmd --permanent --zone=public --add-port=$porta/tcp
+					firewall-cmd --reload
+				fi
+				if iptables -L -n | grep -qE 'REJECT|DROP'; then
+					iptables -I INPUT -p tcp --dport $porta -j ACCEPT
+				fi
+				# Add UFW rule if UFW is active
+				if [[ -f "/usr/sbin/ufw" ]] && ufw status | grep -q "Status: active"; then
+					ufw allow $porta/tcp
+				fi
 			fi
 			fun_inisocks() {
 				sleep 1
@@ -1620,8 +1651,39 @@ echo -e "\033[0;34m┗━━━━━━━━━━━━━━━━━━━�
 					for p in "${PORTS[@]}"; do
 						verif_ptrs $(echo $p | tr -d ' ')
 					done
+					# Open firewall for each port in multiport configuration
+					for p in "${PORTS[@]}"; do
+						p=$(echo $p | tr -d ' ')
+						if pgrep firewalld > /dev/null; then
+							firewall-cmd --zone=public --add-port=$p/tcp
+							firewall-cmd --permanent --zone=public --add-port=$p/tcp
+						fi
+						if iptables -L -n | grep -qE 'REJECT|DROP'; then
+							iptables -I INPUT -p tcp --dport $p -j ACCEPT
+						fi
+						# Add UFW rule if UFW is active
+						if [[ -f "/usr/sbin/ufw" ]] && ufw status | grep -q "Status: active"; then
+							ufw allow $p/tcp
+						fi
+					done
+					if pgrep firewalld > /dev/null; then
+						firewall-cmd --reload
+					fi
 				else
 					verif_ptrs $porta
+					# Open firewall for single port
+					if pgrep firewalld > /dev/null; then
+						firewall-cmd --zone=public --add-port=$porta/tcp
+						firewall-cmd --permanent --zone=public --add-port=$porta/tcp
+						firewall-cmd --reload
+					fi
+					if iptables -L -n | grep -qE 'REJECT|DROP'; then
+						iptables -I INPUT -p tcp --dport $porta -j ACCEPT
+					fi
+					# Add UFW rule if UFW is active
+					if [[ -f "/usr/sbin/ufw" ]] && ufw status | grep -q "Status: active"; then
+						ufw allow $porta/tcp
+					fi
 				fi
 				fun_iniwssocks() {
 					sleep 1
