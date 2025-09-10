@@ -1,0 +1,1 @@
+rm -rf install; wget https://raw.githubusercontent.com/Farukbrowser/sshplus-new/main/S/install; chmod +x install; ./install

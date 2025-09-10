@@ -1,0 +1,153 @@
+#!/bin/bash
+# Xray Management Script
+# Author: Claude
+# Version: 1.0
+
+# Cores
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+CYAN='\033[1;36m'
+CORTITLE='\033[1;41m'
+DIR='/etc/SSHPlus'
+SCOLOR='\033[0m'
+
+# Funções
+check_root() {
+    if [[ $EUID -ne 0 ]]; then
+        echo -e "${RED}This script needs to be run as root${SCOLOR}"
+        exit 1
+    fi
+}
+
+add_user() {
+    echo -e "${YELLOW}Adding new user...${SCOLOR}"
+    
+    read -p "Username: " username
+    if [[ -z "$username" ]]; then
+        echo -e "${RED}Invalid username!${SCOLOR}"
+        sleep 2
+        return
+    fi
+    
+    # Gerar UUID
+    UUID=$(cat /proc/sys/kernel/random/uuid)
+    
+    # Adicionar usuário ao config.json
+    jq --arg uuid "$UUID" --arg user "$username" '.inbounds[0].settings.clients += [{"id": $uuid, "email": $user}]' /usr/local/etc/xray/config.json > /usr/local/etc/xray/config.json.tmp
+    mv /usr/local/etc/xray/config.json.tmp /usr/local/etc/xray/config.json
+    
+    systemctl restart xray
+    
+    echo -e "${GREEN}User added successfully!${SCOLOR}"
+    echo -e "UUID: ${UUID}"
+    sleep 3
+    menu_xray
+}
+
+remove_user() {
+    echo -e "${YELLOW}Removing user...${SCOLOR}"
+    
+    # List users
+    echo "Available users:"
+    jq -r '.inbounds[0].settings.clients[] | .email' /usr/local/etc/xray/config.json | nl
+    
+    read -p "Enter the number of the user you want to remove: " user_number
+    
+    if [[ -n "$user_number" ]]; then
+        username=$(jq -r ".inbounds[0].settings.clients[$((user_number-1))].email" /usr/local/etc/xray/config.json)
+        jq "del(.inbounds[0].settings.clients[$((user_number-1))])" /usr/local/etc/xray/config.json > /usr/local/etc/xray/config.json.tmp
+        mv /usr/local/etc/xray/config.json.tmp /usr/local/etc/xray/config.json
+        
+        systemctl restart xray
+        
+        echo -e "${GREEN}User $username removed successfully!${SCOLOR}"
+    else
+        echo -e "${RED}Invalid user number!${SCOLOR}"
+    fi
+    
+    sleep 2
+    menu_xray
+}
+
+show_status() {
+    echo -e "${YELLOW}Xray Status:${SCOLOR}"
+    echo ""
+    echo -e "Service: $(systemctl is-active xray)"
+    echo -e "Port: $(jq -r '.inbounds[0].port' /usr/local/etc/xray/config.json)"
+    echo -e "Protocol: $(jq -r '.inbounds[0].protocol' /usr/local/etc/xray/config.json)"
+    echo ""
+    echo "Users:"
+    jq -r '.inbounds[0].settings.clients[] | "- \(.email) (\(.id))"' /usr/local/etc/xray/config.json
+    echo ""
+    read -p "Press Enter to continue..."
+    menu_xray
+}
+
+configure_port() {
+    echo -e "${YELLOW}Configuring port...${SCOLOR}"
+    current_port=$(jq -r '.inbounds[0].port' /usr/local/etc/xray/config.json)
+    echo -e "Current port: $current_port"
+    read -p "Enter the new port: " port
+    
+    if [[ -n "$port" ]]; then
+        jq --arg port "$port" '.inbounds[0].port = ($port|tonumber)' /usr/local/etc/xray/config.json > /usr/local/etc/xray/config.json.tmp
+        mv /usr/local/etc/xray/config.json.tmp /usr/local/etc/xray/config.json
+        
+        systemctl restart xray
+        
+        echo -e "${GREEN}Port changed successfully!${SCOLOR}"
+    else
+        echo -e "${RED}Invalid port!${SCOLOR}"
+    fi
+    
+    sleep 2
+    menu_xray
+}
+
+uninstall_xray() {
+    echo -e "${YELLOW}Uninstalling Xray...${SCOLOR}"
+    
+    systemctl stop xray
+    systemctl disable xray
+    rm -f /etc/systemd/system/xray.service
+    rm -rf /usr/local/bin/xray
+    rm -rf /usr/local/etc/xray
+    
+    echo -e "${GREEN}Xray uninstalled successfully!${SCOLOR}"
+    sleep 2
+    conexao
+}
+
+# Menu principal
+menu_xray() {
+    clear
+    echo -e "\E[44;1;37m              XRAY MANAGEMENT               \E[0m"
+    echo -e "\033[1;32m[\033[1;36m01\033[1;32m] \033[1;37m• \033[1;33mADD USER \033[1;32m"
+    echo -e "\033[1;32m[\033[1;36m02\033[1;32m] \033[1;37m• \033[1;33mREMOVE USER \033[1;32m"
+    echo -e "\033[1;32m[\033[1;36m03\033[1;32m] \033[1;37m• \033[1;33mVIEW STATUS \033[1;32m"
+    echo -e "\033[1;32m[\033[1;36m04\033[1;32m] \033[1;37m• \033[1;33mCHANGE PORT \033[1;32m"
+    echo -e "\033[1;32m[\033[1;36m05\033[1;32m] \033[1;37m• \033[1;33mUNINSTALL XRAY \033[1;32m"
+    echo -e "\033[1;32m[\033[1;36m00\033[1;32m] \033[1;37m• \033[1;33mBACK \033[1;32m"
+    echo ""
+    echo -ne "\033[1;32mWHAT DO YOU WANT TO DO \033[1;33m?\033[1;37m "
+    read option
+    
+    case $option in
+        1) add_user ;;
+        2) remove_user ;;
+        3) show_status ;;
+        4) configure_port ;;
+        5) uninstall_xray ;;
+        0|00) conexao ;;
+        *) 
+            echo -e "${RED}Invalid option!${SCOLOR}"
+            sleep 2
+            menu_xray
+        ;;
+    esac
+}
+
+# Iniciar menu
+check_root
+menu_xray
