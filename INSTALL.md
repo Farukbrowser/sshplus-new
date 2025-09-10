@@ -234,7 +234,7 @@ After successful installation:
 ## Support
 
 For additional support:
-- **Telegram**: @vrhostinggp
+- **Telegram**: @ceofarukbrowser
 - **GitHub Issues**: Report bugs and feature requests
 - **Documentation**: Check other .md files in this repository
 

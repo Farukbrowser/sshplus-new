@@ -460,7 +460,7 @@ If you cannot resolve your issue using this guide:
    - Service-specific logs via `journalctl`
 
 3. **Contact support**:
-   - **Telegram**: @vrhostinggp
+   - **Telegram**: @ceofarukbrowser
    - **GitHub Issues**: Create detailed bug reports
    - **Community forums**: Search for similar issues
 
